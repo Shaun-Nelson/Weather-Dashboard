@@ -30,15 +30,20 @@ searchBtn.click(function (event) {
 });
 
 function addToHistory(city, coordinates) {
-  window.localStorage.setItem(city, JSON.stringify(coordinates));
+  window.localStorage.setItem(`wd-${city}`, JSON.stringify(coordinates));
 }
 
 function getHistory() {
   var cities = { ...localStorage };
   for (var city in cities) {
-    createBtn(city);
+    if (city.startsWith("wd-")) createBtn(city.slice(3));
   }
 }
+
+$(".clear").click(function () {
+  window.localStorage.clear();
+  window.location.href = "./index.html";
+});
 
 function createBtn(city) {
   var cityBtn = document.createElement("button");
@@ -46,7 +51,7 @@ function createBtn(city) {
   $(".container-col").append(cityBtn);
 
   $(cityBtn).click(function () {
-    var coordinates = JSON.parse(window.localStorage.getItem(city));
+    var coordinates = JSON.parse(window.localStorage.getItem(`wd-${city}`));
     getForecast(coordinates.lat, coordinates.lon);
   });
 
