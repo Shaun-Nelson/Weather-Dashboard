@@ -1,0 +1,36 @@
+/* Utilities */
+
+.container-col {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+}
+
+.container {
+  display: flex;
+}
+
+/* Navbar */
+
+.navbar-brand {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.navbar > .container-fluid {
+  justify-content: end;
+}
+
+/* Body */
+
+#search-heading {
+  font-size: 1.2rem;
+}
+
+#form1 {
+  max-width: 175px;
+}
+
+hr {
+  width: 250px;
+}
