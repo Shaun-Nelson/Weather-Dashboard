@@ -9,7 +9,7 @@ searchBtn.click(function (event) {
 
   var userInput = input.val().toUpperCase();
   if (userInput) {
-    var coordinatesEndpoint = `http://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${apiKey}`;
+    var coordinatesEndpoint = `https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${apiKey}`;
 
     $.ajax(coordinatesEndpoint).then(function (data) {
       var lat = data[0].lat;
