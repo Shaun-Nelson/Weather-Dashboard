@@ -24,7 +24,6 @@
   </head>
   <body>
     <header>
-      <!-- <h1 id="main-heading">Weather Dashboard</h1> -->
       <nav class="navbar bg-primary">
         <div class="container-fluid">
           <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
@@ -34,91 +33,100 @@
 
     <main>
       <!-- Searchbar and History-->
-      <div class="container m-0">
-        <section>
+        <div class="container">
           <div class="container-col">
-            <h2 id="search-heading" class="px-3 py-2">Search for a City:</h2>
-            <div class="input-group px-2 col-2">
-              <div class="form-outline">
-                <input
-                  type="search"
-                  id="form1"
-                  class="form-control"
-                  placeholder="Search"
-                />
-              </div>
-              <button type="button" class="btn btn-primary btn-search">
-                <i class="fas fa-search"></i>
-              </button>
-              <hr />
-              <button class="btn btn-outline-primary clear my-1 w-100">
-                Clear History
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- Current Forecast -->
-        <div class="container-col-2">
-          <section>
-            <div class="card current-forecast mt-2 ms-4" style="display: none">
-              <div class="card-header bg-body current-header"></div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item current-temp">Temp:</li>
-                <li class="list-group-item current-wind">Wind:</li>
-                <li class="list-group-item current-humidity">Humidity:</li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- 5-Day Forecast -->
-          <div class="container">
-            <section class="">
-              <h2 style="display: none">5-Day Forecast</h2>
-              <div class="card" style="display: none">
-                <div class="card-header">Featured</div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Temp:</li>
-                  <li class="list-group-item">Wind:</li>
-                  <li class="list-group-item">Humidity:</li>
-                </ul>
-              </div>
-              <div class="card" style="display: none">
-                <div class="card-header">Featured</div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Temp:</li>
-                  <li class="list-group-item">Wind:</li>
-                  <li class="list-group-item">Humidity:</li>
-                </ul>
-              </div>
-              <div class="card" style="display: none">
-                <div class="card-header">Featured</div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Temp:</li>
-                  <li class="list-group-item">Wind:</li>
-                  <li class="list-group-item">Humidity:</li>
-                </ul>
-              </div>
-              <div class="card" style="display: none">
-                <div class="card-header">Featured</div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Temp:</li>
-                  <li class="list-group-item">Wind:</li>
-                  <li class="list-group-item">Humidity:</li>
-                </ul>
-              </div>
-              <div class="card" style="display: none">
-                <div class="card-header">Featured</div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Temp:</li>
-                  <li class="list-group-item">Wind:</li>
-                  <li class="list-group-item">Humidity:</li>
-                </ul>
+            <section>
+              <h2 id="search-heading" class="px-3 py-2">Search for a City:</h2>
+              <div class="input-group px-2 col-2">
+                <div class="form-outline">
+                  <input
+                    type="search"
+                    id="form1"
+                    class="form-control"
+                    placeholder="Search"
+                  />
+                </div>
+                <button type="button" class="btn btn-primary btn-search">
+                  <i class="fas fa-search"></i>
+                </button>
+                <hr />
+                <button class="btn btn-outline-primary clear my-1 w-100">
+                  Clear History
+                </button>
               </div>
             </section>
           </div>
+        
+        <!-- Current Forecast -->
+        <div class="container-col-2">
+          <section id="current">
+            <div class="container">
+              <div class="card current-forecast mt-2 ms-5" style="display: none">
+                <div class="card-header bg-body current-header"></div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item current-temp">Temp:</li>
+                  <li class="list-group-item current-wind">Wind:</li>
+                  <li class="list-group-item current-humidity">Humidity:</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <!-- 5-Day Forecast -->
+          <div class="container ms-5">
+            <section>
+              <h2 class="five-day-header my-2 mt-4" style="display: none">
+                5-Day Forecast
+              </h2>
+            <div class="container">
+              <div class="card" style="display: none">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item date">Date:</li>
+                  <li class="list-group-item icon"></li>
+                  <li class="list-group-item temp">Temp:</li>
+                  <li class="list-group-item wind">Wind:</li>
+                  <li class="list-group-item hum">Humidity:</li>
+                </ul>
+              </div>
+              <div class="card" style="display: none">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item date">Date:</li>
+                  <li class="list-group-item icon"></li>
+                  <li class="list-group-item temp">Temp:</li>
+                  <li class="list-group-item wind">Wind:</li>
+                  <li class="list-group-item hum">Humidity:</li>
+                </ul>
+              </div>
+              <div class="card" style="display: none">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item date">Date:</li>
+                  <li class="list-group-item icon"></li>
+                  <li class="list-group-item temp">Temp:</li>
+                  <li class="list-group-item wind">Wind:</li>
+                  <li class="list-group-item hum">Humidity:</li>
+                </ul>
+              </div>
+              <div class="card" style="display: none">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item date">Date:</li>
+                  <li class="list-group-item icon"></li>
+                  <li class="list-group-item temp">Temp:</li>
+                  <li class="list-group-item wind">Wind:</li>
+                  <li class="list-group-item hum">Humidity:</li>
+                </ul>
+              </div>
+              <div class="card" style="display: none">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item date">Date:</li>
+                  <li class="list-group-item icon"></li>
+                  <li class="list-group-item temp">Temp:</li>
+                  <li class="list-group-item wind">Wind:</li>
+                  <li class="list-group-item hum">Humidity:</li>
+                </ul>
+            </div>
+            </section>
+          </div>
+          </div>
         </div>
-      </div>
     </main>
     <!-- jQuery CDN -->
     <script
