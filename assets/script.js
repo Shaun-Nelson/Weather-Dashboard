@@ -67,9 +67,9 @@ function getForecast(lat, lon) {
     );
     // TODO get next day properly
     var filteredData = [];
-    for (var i = 0; i < data.list.length - 1; i += 7) {
+    for (var i = 0; i < data.list.length; i += 7) {
       // slices out current day from data and gets next 5 day's forecast
-      var sliced = data.list.slice(7);
+      var sliced = data.list.slice(11);
       filteredData.push(sliced[i]);
     }
 
