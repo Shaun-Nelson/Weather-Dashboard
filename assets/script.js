@@ -4,7 +4,8 @@ var clearBtn = $(".clear");
 var input = $("#form1");
 
 function handleSubmit() {
-  var userInput = input.val().toUpperCase();
+  var userInput = input.val().trim().toUpperCase();
+  input.val("");
   if (userInput) {
     var coordinatesEndpoint = `https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${apiKey}`;
 
@@ -16,7 +17,7 @@ function handleSubmit() {
 
       $.ajax(forecastEndpoint).then(function (data) {
         console.log(data);
-        addToHistory(userInput, { lat: lat, lon: lon });
+        setHistory(userInput, { lat: lat, lon: lon });
         getForecast(lat, lon);
       });
     });
@@ -26,12 +27,12 @@ function handleSubmit() {
   }
 }
 
-function addToHistory(city, coordinates) {
+function setHistory(city, coordinates) {
   window.localStorage.setItem(`wd-${city}`, JSON.stringify(coordinates));
 }
 
 function getHistory() {
-  // From StackOverflow: uses spread operator to retrieve all
+  // From Stack Overflow: uses spread operator to retrieve all
   // entries in local storage as an object
   var cities = { ...localStorage };
   for (var city in cities) {
@@ -43,16 +44,16 @@ function getHistory() {
 }
 
 function createBtn(city) {
-  var cityBtn = document.createElement("button");
-  $(cityBtn).text(city).addClass("my-1 mx-1 w-100 btn btn-primary");
-  $(".container-col").append(cityBtn);
+  var btn = document.createElement("button");
+  $(btn).text(city).addClass("my-1 mx-1 w-100 btn btn-primary");
+  $(".input-group").append(btn);
 
-  $(cityBtn).click(function () {
+  $(btn).click(function () {
     var coordinates = JSON.parse(window.localStorage.getItem(`wd-${city}`));
     getForecast(coordinates.lat, coordinates.lon);
   });
 
-  return cityBtn;
+  return btn;
 }
 
 function getForecast(lat, lon) {
@@ -64,16 +65,12 @@ function getForecast(lat, lon) {
       "src",
       `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
     );
-
+    // TODO get next day properly
     var filteredData = [];
-    for (var i = 0; i < data.list.length - 1; i++) {
-      if (
-        data.list[i].dt_txt.split(" ")[0] !==
-        data.list[i + 1].dt_txt.split(" ")[0]
-      ) {
-        // i + 3 to get next day due to GMT/UTC
-        filteredData.push(data.list[i + 3]);
-      }
+    for (var i = 0; i < data.list.length - 1; i += 7) {
+      // slices out current day from data and gets next 5 day's forecast
+      var sliced = data.list.slice(7);
+      filteredData.push(sliced[i]);
     }
 
     var date = dayjs.unix(data.list[0].dt).format("M/D/YYYY");

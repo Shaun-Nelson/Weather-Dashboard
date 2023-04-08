@@ -10,16 +10,14 @@
 .container-col-2 {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .container {
   display: flex;
   margin: 0;
   padding: 0;
-}
-
-.list-group-item {
-  padding: 0.5rem;
 }
 
 /* Navbar */
@@ -40,7 +38,7 @@
 }
 
 #form1 {
-  max-width: 175px;
+  max-width: 200px;
   border-radius: 0;
 }
 
@@ -50,4 +48,14 @@ hr {
 
 .current {
   height: fit-content;
+}
+
+.list-group-item {
+  padding: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
 }
