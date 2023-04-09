@@ -67,12 +67,16 @@ function getForecast(lat, lon) {
     );
     // TODO get next day properly
     var filteredData = [];
-    for (var i = 0; i < data.list.length; i += 7) {
-      // slices out current day from data and gets next 5 day's forecast
-      var sliced = data.list.slice(11);
-      filteredData.push(sliced[i]);
+    console.log(data);
+    for (var i = 0; i < data.list.length - 1; i++) {
+      if (
+        data.list[i].dt_txt.split(" ")[0] !==
+        data.list[i + 1].dt_txt.split(" ")[0]
+      ) {
+        filteredData.push(data.list[i + 2]);
+      }
     }
-
+    console.log(filteredData);
     var date = dayjs.unix(data.list[0].dt).format("M/D/YYYY");
     var name = data.city.name;
     var temp = data.list[0].main.temp.toFixed(2);

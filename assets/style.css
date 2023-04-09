@@ -33,6 +33,10 @@
   border-radius: 0;
 }
 
+.input-group {
+  max-width: 275px;
+}
+
 hr {
   width: 100%;
 }
@@ -48,5 +52,10 @@ hr {
 @media screen and (max-width: 768px) {
   .container {
     flex-direction: column;
+    width: fit-content;
+  }
+
+  .card {
+    margin-top: 0.5rem;
   }
 }
