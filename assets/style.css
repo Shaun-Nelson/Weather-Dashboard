@@ -29,12 +29,12 @@
 }
 
 #form1 {
-  max-width: 200px;
+  max-width: 120px;
   border-radius: 0;
 }
 
 .input-group {
-  max-width: 300px;
+  width: 200px;
 }
 
 hr {
@@ -47,6 +47,7 @@ hr {
 
 .card {
   margin-right: 0.5rem;
+  width: fit-content;
 }
 
 .list-group-item {

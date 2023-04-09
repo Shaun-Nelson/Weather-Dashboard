@@ -68,12 +68,6 @@ function getForecast(lat, lon) {
   $.ajax(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
   ).then(function (data) {
-    var icon = document.createElement("img");
-    $(icon).attr(
-      "src",
-      `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
-    );
-
     var filteredData = [];
     for (var i = 0; i < data.list.length - 1; i++) {
       // if the date string is different than the next in the array, add the next date's data
@@ -91,6 +85,11 @@ function getForecast(lat, lon) {
     var temp = data.list[0].main.temp.toFixed(2);
     var wind = data.list[0].wind.speed.toFixed(2);
     var humidity = data.list[0].main.humidity;
+    var icon = document.createElement("img");
+    $(icon).attr(
+      "src",
+      `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
+    );
 
     // updates today's weather card with data from API
     $(".card").css("display", "block");
@@ -117,7 +116,7 @@ function getForecast(lat, lon) {
     });
     $(`.temp`).each(function (index) {
       console.log();
-      $(this).text(`Temp: ${filteredData[index].main.temp.toFixed(2)} °C`);
+      $(this).text(`Temp: ${filteredData[index].main.temp_max.toFixed(2)} °C`);
     });
     $(`.wind`).each(function (index) {
       $(this).text(`Wind: ${filteredData[index].wind.speed.toFixed(2)} KPH`);
