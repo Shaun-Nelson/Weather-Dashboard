@@ -34,7 +34,7 @@
 }
 
 .input-group {
-  max-width: 275px;
+  max-width: 300px;
 }
 
 hr {
@@ -43,6 +43,10 @@ hr {
 
 .current {
   height: fit-content;
+}
+
+.card {
+  margin-right: 0.5rem;
 }
 
 .list-group-item {

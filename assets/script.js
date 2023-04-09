@@ -5,29 +5,37 @@ var input = $("#form1");
 
 function handleSubmit() {
   var userInput = input.val().trim().toUpperCase();
+  // resets search field
   input.val("");
   if (userInput) {
     var coordinatesEndpoint = `https://api.openweathermap.org/geo/1.0/direct?q=${userInput}&appid=${apiKey}`;
 
     $.ajax(coordinatesEndpoint).then(function (data) {
-      var lat = data[0].lat;
-      var lon = data[0].lon;
+      // endpoint returns an empty array if input is invalid
+      if (data.length > 0) {
+        var lat = data[0].lat;
+        var lon = data[0].lon;
 
-      var forecastEndpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+        var forecastEndpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
-      $.ajax(forecastEndpoint).then(function (data) {
-        console.log(data);
-        setHistory(userInput, { lat: lat, lon: lon });
-        getForecast(lat, lon);
-      });
+        $.ajax(forecastEndpoint).then(function () {
+          setHistory(userInput, { lat: lat, lon: lon });
+          getForecast(lat, lon);
+        });
+
+        if (window.localStorage.getItem(`wd-${userInput}`) === null) {
+          createBtn(userInput);
+        }
+      } else {
+        input.val("Invalid City");
+      }
     });
-    if (window.localStorage.getItem(`wd-${userInput}`) === null) {
-      createBtn(userInput);
-    }
   }
 }
 
 function setHistory(city, coordinates) {
+  // each item set to local storage is given the prefix "wd-" to differentiate them
+  // from those set by other websites/apps
   window.localStorage.setItem(`wd-${city}`, JSON.stringify(coordinates));
 }
 
@@ -65,24 +73,26 @@ function getForecast(lat, lon) {
       "src",
       `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}.png`
     );
-    // TODO get next day properly
+
     var filteredData = [];
-    console.log(data);
     for (var i = 0; i < data.list.length - 1; i++) {
+      // if the date string is different than the next in the array, add the next date's data
+      // to the filteredData array, resulting in the 5-day forecast
       if (
         data.list[i].dt_txt.split(" ")[0] !==
         data.list[i + 1].dt_txt.split(" ")[0]
       ) {
-        filteredData.push(data.list[i + 2]);
+        filteredData.push(data.list[i + 1]);
       }
     }
-    console.log(filteredData);
+
     var date = dayjs.unix(data.list[0].dt).format("M/D/YYYY");
     var name = data.city.name;
     var temp = data.list[0].main.temp.toFixed(2);
     var wind = data.list[0].wind.speed.toFixed(2);
     var humidity = data.list[0].main.humidity;
 
+    // updates today's weather card with data from API
     $(".card").css("display", "block");
     $(".current-header").text(`${name} ${date}`);
     $(".current-header").append(icon);
@@ -90,9 +100,12 @@ function getForecast(lat, lon) {
     $(".current-wind").text(`Wind: ${wind} KPH`);
     $(".current-humidity").text(`Humidity: ${humidity} %`);
 
+    //updates 5-day forecast cards with data from API
     $(".five-day-header").css("display", "block");
     $(`.date`).each(function (index) {
-      $(this).text(dayjs.unix(filteredData[index].dt).format("M/D/YYYY"));
+      $(this).text(
+        dayjs(filteredData[index].dt_txt.split(" ")[0]).format("M/D/YYYY")
+      );
     });
     $(`.icon`).each(function (index) {
       var icon = document.createElement("img");
