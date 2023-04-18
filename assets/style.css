@@ -29,12 +29,12 @@
 }
 
 #form1 {
-  max-width: 120px;
+  width: 320px;
   border-radius: 0;
 }
 
 .input-group {
-  width: 200px;
+  width: 400px;
 }
 
 hr {
@@ -54,7 +54,8 @@ hr {
   padding: 0.5rem;
 }
 
-@media screen and (max-width: 768px) {
+/* Mobile */
+@media screen and (max-width: 450px) {
   .container {
     flex-direction: column;
     width: fit-content;
@@ -62,5 +63,26 @@ hr {
 
   .card {
     margin-top: 0.5rem;
+  }
+
+  #form1 {
+    max-width: 300px;
+    border-radius: 0;
+  }
+
+  .input-group {
+    width: 350px;
+  }
+}
+
+/* Tablets */
+@media screen and (min-width: 450px) and (max-width: 920px) {
+  #form1 {
+    max-width: 120px;
+    border-radius: 0;
+  }
+
+  .input-group {
+    width: 200px;
   }
 }

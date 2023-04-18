@@ -102,9 +102,7 @@ function getForecast(lat, lon) {
     //updates 5-day forecast cards with data from API
     $(".five-day-header").css("display", "block");
     $(`.date`).each(function (index) {
-      $(this).text(
-        dayjs(filteredData[index].dt_txt.split(" ")[0]).format("M/D/YYYY")
-      );
+      $(this).text(dayjs.unix(filteredData[index].dt).format("M/D/YYYY"));
     });
     $(`.icon`).each(function (index) {
       var icon = document.createElement("img");
